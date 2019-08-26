@@ -1,7 +1,35 @@
-# steerableAdaptiveLengthOrientationSpaceDetector
+# Adaptive Resolution Orientation Space
+
+## Abstract
+Microscopy images of cytoskeletal, nucleoskeletal, and other filamentous
+structures contain complex junctions where multiple filaments with distinct
+orientations overlap, yet state-of-the-art software generally uses single
+orientation analysis to segment these structures.
+We describe an image analysis approach to simultaneously segment both
+filamentous structures and their intersections in microscopy images,
+based on analytically resolving coincident multiple orientations upon
+image filtering in a manner that balances orientation resolution and
+spatial localization.
+
+
+## Manuscript
+
+"Adaptive-Resolution Multi-Orientation Analysis of Complex Filamentous Network Images"
+
+Mark Kittisopikul<sup>1,2</sup>, Amir Vahabikashi<sup>2</sup>, Takeshi Shimi<sup>2,3</sup>, Robert D. Goldman<sup>2</sup>, and Khuloud Jaqaman<sup>1,4</sup>
+
+### Affiliations
+
+1. Department of Biophysics, UT Southwestern Medical Center, Dallas, TX 75390
+2. Department of Cell and Developmental Biology, Feinberg School of Medicine, Northwestern University, Chicago, IL 60611
+3. Institute of Innovative Research, Tokyo Institute of Technology, Yokohama, Japan
+4. Department of Bioinformatics, UT Southwestern Medical Center, Dallas, TX 75390
+
+
+## steerableAdaptiveLengthOrientationSpaceDetector
 Perform adaptive length orientation space segmentation
 
-# INPUT
+### INPUT
     I - image
         Type: 2D numeric matrix, non-empty
     order - (optional), K parameter for OrientationSpaceFilter
@@ -12,7 +40,7 @@ Perform adaptive length orientation space segmentation
         Type: Numeric, scalar
         Default: 2 (pixels)
 
-# PARAMETERS
+### PARAMETERS
     filter - OrientationSpaceFilter to use, overrides order and sigma
     response - OrientationSpaceResponse to use, overrides order and sigma
     adaptLengthInRegime - Search current maxima regime to find smallest slopes
@@ -49,7 +77,7 @@ Perform adaptive length orientation space segmentation
         Type: numeric, scalar
         Default: 3
 
-# OUTPUT
+### OUTPUT
     response - response values (at responseOrder) of maxima
                size(image) x M
     theta    - maxima
@@ -70,7 +98,7 @@ Perform adaptive length orientation space segmentation
     .params - input parameters
     .combinedResR - currently the same as response
 
-# EXAMPLES
+### EXAMPLES
     demo = zeros(256);
     demo(128,:) = 1;
     demo = max(imgaussfilt(demo,2),imgaussfilt(eye(256),2));
@@ -80,3 +108,5 @@ Perform adaptive length orientation space segmentation
     orientationSpace.rainbowOrientationQuivers(theta,res,hsv(32));
     xlim(128+[-10 10]);
     ylim(128+[-10 10]);
+
+![Zoom in Demonstration of Adaptive Resolution Orientation Space and NLMS Analysis](demo/demo.png)
