@@ -37,12 +37,17 @@ MATLAB 2017a or later
 * Parallel Computing Toolbox
 * MATLAB Distributed Computing Server
 
+See https://www.mathworks.com/support/requirements/matlab-system-requirements.html for operating system and hardware requirements.
+
+Git for installation (Alternatively, download a zip file)
+
 ## Installation
 Typical Install Time: 5 minutes
 
 In MATLAB execute:
-	!git clone https://github.com/mkitti/AdaptiveResolutionOrientationSpace 
-	addpath(genpath('AdativeResolutionOrientationSpace'))
+
+    !git clone https://github.com/mkitti/AdaptiveResolutionOrientationSpace 
+    addpath(genpath('AdativeResolutionOrientationSpace'))
 
 ## steerableAdaptiveResolutionOrientationSpaceDetector
 Perform adaptive resolution orientation space segmentation
