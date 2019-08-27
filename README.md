@@ -63,7 +63,7 @@ The only required input is a 2D image.
         Type: Numeric, scalar
         Default: 8
     sigma - (optional), scale parameter setting the radial bandpass in pixels
-            central frequency, f_c, of the bandpass fliter will be 1/2/pi/sigma 
+            central frequency, f_c, of the bandpass filter will be 1/2/pi/sigma 
         Type: Numeric, scalar
         Default: 2 (pixels)
 
