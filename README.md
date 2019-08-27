@@ -47,7 +47,7 @@ Typical Install Time: 5 minutes
 In MATLAB execute:
 
     !git clone https://github.com/mkitti/AdaptiveResolutionOrientationSpace 
-    addpath(genpath('AdativeResolutionOrientationSpace'))
+    addpath(genpath('AdaptiveResolutionOrientationSpace'))
 
 ## steerableAdaptiveResolutionOrientationSpaceDetector
 Perform adaptive resolution orientation space segmentation
