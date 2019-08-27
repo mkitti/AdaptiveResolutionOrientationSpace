@@ -9,7 +9,7 @@ function [ response, theta, nms, angularResponse, other ] = steerableAdaptiveRes
 %        Type: Numeric, scalar
 %        Default: 8
 %    sigma - (optional), scale parameter setting the radial bandpass in pixels
-%            central frequency of the bandpass fliter will be 1/2/pi/sigma
+%            central frequency of the bandpass filter will be 1/2/pi/sigma
 %        Type: Numeric, scalar
 %        Default: 2 (pixels)
 %
