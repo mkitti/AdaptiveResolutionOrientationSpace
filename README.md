@@ -29,10 +29,10 @@ Mark Kittisopikul<sup>1,2</sup>, Amir Vahabikashi<sup>2</sup>, Takeshi Shimi<sup
 ## steerableAdaptiveResolutionOrientationSpaceDetector
 Perform adaptive resolution orientation space segmentation
 
-### INPUT
-    I - image
-        Type: 2D numeric matrix, non-empty
-    order - (optional), K parameter for OrientationSpaceFilter
+### BASIC INPUT (ORDERED ARGUMENTS)
+    I - (required) image
+        Type: 2D numeric matrix, non-empty, N x M
+    order - (optional), K_h parameter that determines the highest $ K $ value used for initial filtering via OrientationSpaceFilter
         Type: Numeric, scalar
         Default: 8
     sigma - (optional), scale parameter setting the radial bandpass in pixels
@@ -40,63 +40,122 @@ Perform adaptive resolution orientation space segmentation
         Type: Numeric, scalar
         Default: 2 (pixels)
 
-### PARAMETERS
-    filter - OrientationSpaceFilter to use, overrides order and sigma
-    response - OrientationSpaceResponse to use, overrides order and sigma
-    adaptLengthInRegime - Search current maxima regime to find smallest slopes
+### ADVANCED INPUTS (NAMED PARAMETERS)
+    adaptLengthInRegime - Adapt the resolution with the highest regime by searching for the maxima with the smallest derivative with respect to K;
         Type: logical
         Default: true
-    meanThresholdMethod - function to determine threshold of mean response
+    meanThresholdMethod - Function to determine threshold of mean response
         Type: char, function_handle
         Default: @thresholdOtsu
-    mask - binary mask the same size as I
+    mask - Binary mask the same size as I to limit the area of processing
         Type: logical
         Default: []
-    nlmsMask - binary mask the same size as I to apply to NLMS
+    nlmsMask - Override mask for NLMS processing. N x M
         Type: logical
-        Default: []
-    nlmsThreshold - threshold to apply to NLMS
+        Default: [] (Calculate mask using mean filter response)
+    nlmsThreshold - Override attenuated mean response threshold to apply to NLMS
         Type: numeric, 2D
-        Default: []
-    useParallelPool - true if parallel pool should be used
+        Default: [] (Use AMOR)
+    useParallelPool - Logical if parallel pool should be used
         Type: logical
         Default: true
-    maskDilationDiskRadius - radius in pixels to dilate the mask 
+    maskDilationDiskRadius - Disc structure element radius in pixels to dilate the mask calculated from the mean response
         Type: numeric
         Default: 3
-    maskFillHoles - fill holes in the mask
+    maskFillHoles - Logical indicating if holes should be filled in the nlmsMask. True indicates to holes should be filled.
         Type: logical
         Default: false
-    diagnosticMode - true if diagnostic figures should be shown
+    diagnosticMode - True if diagnostic figures should be shown
         Type: logical, scalar
         Default: false
-    K_sampling_delta - interval to sample K when using adaptLengthInRegime
+    K_sampling_delta - Interval to sample K when using adaptLengthInRegime
         Type: numeric, scalar
         Default: 0.1
-    responseOrder - order from which to retrieve response (not maxima)
+    responseOrder - K_m, orientation filter resolution at which to calculate the response values;
         Type: numeric, scalar
         Default: 3
+    bridgingLevels - Number of bridging steps to complete. A value of 1 or 2 is valid.
+    	Type: numeric, scalar
+    	Default: 2
+    suppressionValue - Value to assign to pixels that are suppressed in the NMS/NLMS steps
+    	Type: numeric, scalar
+    	Default: 0
+    filter - OrientationSpaceFilter object instance to use, overrides order and sigma parameters; Used to share filter initialization between many function calls
+    	Type: OrientationSpaceFilter
+    	Default: Create new filter based on order and sigma inputs
+    response - OrientationSpaceResponse object to use, overrides order, sigma, and filter; used to share filter response between many function calls.
+    	Type: OrientationSpaceResponse
+    	Default: Convolve filter with the response to calculate the response
+
+### UNSERIALIZATION INPUTS (NAMED PARAMETERS)
+These parameters allow some of the output in the struct {\em other}, below, to be fed back into the function in order to obtain the full output of the function. The purpose of this is so that the full output can be regenerated from a subset of the output that has been saved to disk, or otherwise serialized, without the need for complete recomputation.
+
+    maxima_highest - numeric 3D array
+    K_highest - numeric 3D array
+    bridging - struct array
+    nlms_highest - numeric 3D array
+    nlms_single - numeric 2D array
+
+See below for detailed descriptions
 
 ### OUTPUT
-    response - response values (at responseOrder) of maxima
-               size(image) x M
-    theta    - maxima
-    nms      - non-maximum suppression like image
-               same size as image
-    angularResponse
-             - response values at regular intervals
-    other    - struct containing various variables:
-    .nlms_highest - NLMS using highest regime maxima
-    .maxima_highest - Maxima at highest regime
-    .nlms_highest_mip - Maximum Intensity Projection of .nlms_highest
-    .maximum_single_angle - Angle at lowest single-orientation regime
-    .nlms_single - NLMS at maximum_single_angle
-    .nlms_single_binary - binarized .nlms_single by meanResponse
-    .attenuatedMeanResponse - meanResponse attenuated by neighborhood
-    .meanResponse - mean orientationSpace response
-    .nlmsMask - mask used to process NLMS
-    .params - input parameters
-    .combinedResR - currently the same as response
+    response - Orientation filter response values at resolution K = K_m corresponding to the maxima in theta
+        Type: 3D numeric array of dimensions N x M x T
+    theta    - Contains the orientation local maxima detected at each pixel. T corresponds to the great number of maxima found at any pixel in the image
+        Type: 3D numeric array of dimensions N x M x T
+    nms      - Response weighted segmentation output, non-maximum suppression like image
+        Type: 2D numeric array of dimensions N x M
+    angularResponse - Filter responses corresponding to equiangular 2K_h+1 samples at resolution K = K_h
+        Type: 3D array of dimensions N x M x 2K_h+1
+    other    - Struct containing the following fields for lower-level analysis and serialization
+        .nlms_highest -  AR-NLMS using highest regime maxima using K = K_m responses
+            Type: 3D numeric array of dimensions N x M x (T-1)
+        .nlms_highest_mip -  Maximum response projection of nlms_highest
+            Type: 2D numeric array of dimensions N x M
+        .maxima_highest -  Orientation local maxima at highest regime
+            Type: 3D numeric array of dimensions N x M x (T-1)
+        .K_highest - K values corresponding to maxima in maxima_highest
+            Type: 3D numeric array of dimensions N x M x (T-1)
+        .maxima_single_angle - Orientation maximum at Regime 0
+            Type: 2D numeric array of dimensions N x M
+        .nlms_single - NLMS using maximum_single_angle and K = K_m responses
+            Type: 2D numeric array of dimensions N x M
+        .nlms_single_binary nlms_single thresholded using the attenuatedMeanResponse
+            Type: 2D logical array of dimensions N x M
+        .meanResponse - Mean orientation filter response
+            Type: 2D numeric array of dimensions N x M
+        .attenuatedMeanResponse - meanResponse attenuated by neighborhood occupancy
+            Type: 2D numeric array of dimensions N x M
+        .nlmsMask - Logical mask of the area where the segmentation was analyzed
+            Type: 2D logical array of dimensions N x M
+        .params - Struct containing the input parameters
+            Type: Struct
+        .nlmsR NLMS using maxima from the highest regime and from regime 0 using the filter response at K = K_h
+            Type: 3D numeric array of dimensions N x M x T
+        .nlmsR_mip_binary Maximum response projection of nlmsR thresholded by the attenuatedMeanResponse
+            Type: 2D logical array of dimensions N x M
+        .bridging A structure array with a length of 2. First element of the array corresponds with the first bridging step. The second element of the array corresponds with the second bridging step.
+            .full_binary - (Top input) Array with true values indicating a superset of pixels in the final segmentation
+                Type: 2D logical array, N x M
+            .consensus_binary - (Left input) 2D logical array containing a subset of pixels used in bridging
+                Type: 2D logical array, N x M
+            .segments - Connected components to connect together with bridges
+                Type: 2D integer array, N x M
+            .fragments - Pixels in which to search for bridges between segments
+                Type: 2D integer array, N x M
+            .bridges - Pixels added to connect segments
+                Type: 2D logical array, N x M
+            .bridgedSkeleton - 2D logical array, output of the bridging procedure, where the segments have been connected with the bridges and have been subjected to morphological skeletonization
+
+### USE OF OUTPUTS
+
+The main output of the function is the segmentation as outlined in Section \ref{section:segmentation}. Along with this the orientations and corresponding response values at K = K_m are provided. This is meant to mimic the outputs provided by steerable filter analysis.
+
+The fourth output is the sampled orientation responses at K = K_h and is again meant for compatibility with the output by prior steerable filter analysis. This can be used to perform further analysis of orientation space including at for lower resolutions (K < K_h).
+
+The fifth output is a structure that contains fields referring to intermediate results created in the analysis process. Importantly, this contains information about the three AR-NLMS procedures performed. Because of the maximum response projections performed segmentation, this information is not readily extracted from the prior outputs. This information can be used to determine from what step of the procedure a pixel was added or excluded from the final output. Additionally, the orientation information could be used for more precise localization operations.
+
+Overall, the outputs allow for the outputs to readily used as a direct segmentation by thresholding the NMS-like output or as an intermediate step for further analysis.
 
 ### EXAMPLES
     demo = zeros(256);
