@@ -201,9 +201,9 @@ OrientationSpaceFilter represents a filter that is polar separable in the Fourie
     F = OrientationSpaceFilter(f_c,b_f,K);
     F = OrientationSpacefilter.constructByRadialOrder(f_c,K_f,K);
 
-f_c is the central frequency of the filter
-b_f is the frequency bandwidth
-K is the order of the filter that determines orientation resolution
+* f_c is the central frequency of the filter
+* b_f is the frequency bandwidth
+* K is the order of the filter that determines orientation resolution
 
 ### Application to Image
 
