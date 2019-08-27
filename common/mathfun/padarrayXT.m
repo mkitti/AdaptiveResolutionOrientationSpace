@@ -60,6 +60,25 @@ function b = padarrayXT(varargin)
 %       D = padarray(C,[3 3],0,'both')
 %
 %   See also CIRCSHIFT, IMFILTER.
+%
+% Copyright (C) 2019, Jaqaman Lab - UT Southwestern, Goldman Lab - Northwestern 
+%
+% This file is part of AdaptiveResolutionOrientationSpace.
+% 
+% AdaptiveResolutionOrientationSpace is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% AdaptiveResolutionOrientationSpace is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with AdaptiveResolutionOrientationSpace.  If not, see <http://www.gnu.org/licenses/>.
+% 
+% 
 
 %   Copyright 1993-2010 The MathWorks, Inc.
 %   $Revision: 1.11.4.13 $  $Date: 2011/08/09 17:51:33 $

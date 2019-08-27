@@ -19,6 +19,25 @@ function varargout = joinColumns(delimeter,varargin)
 % concatenating the matrices vertically separated by the scalar delimeter
 %
 % joinColumns(matrix) and joinColumns([],matrix) are equivalent to matrix(:)
+%
+% Copyright (C) 2019, Jaqaman Lab - UT Southwestern, Goldman Lab - Northwestern 
+%
+% This file is part of AdaptiveResolutionOrientationSpace.
+% 
+% AdaptiveResolutionOrientationSpace is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% AdaptiveResolutionOrientationSpace is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with AdaptiveResolutionOrientationSpace.  If not, see <http://www.gnu.org/licenses/>.
+% 
+% 
     
     % INPUT VALIDATION: If delimeter is not a scalar value, then assume no
     % delimeter is given and that the matrix should be turned into a column
