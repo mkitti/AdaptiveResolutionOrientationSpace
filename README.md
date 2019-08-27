@@ -26,8 +26,8 @@ Mark Kittisopikul<sup>1,2</sup>, Amir Vahabikashi<sup>2</sup>, Takeshi Shimi<sup
 4. Department of Bioinformatics, UT Southwestern Medical Center, Dallas, TX 75390
 
 
-## steerableAdaptiveLengthOrientationSpaceDetector
-Perform adaptive length orientation space segmentation
+## steerableAdaptiveResolutionOrientationSpaceDetector
+Perform adaptive resolution orientation space segmentation
 
 ### INPUT
     I - image

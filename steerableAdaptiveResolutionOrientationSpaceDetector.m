@@ -1,5 +1,5 @@
-function [ response, theta, nms, angularResponse, other ] = steerableAdaptiveLengthOrientationSpaceDetector( I, varargin )
-%steerableAdaptiveLengthOrientationSpaceDetector Perform adaptive length orientation
+function [ response, theta, nms, angularResponse, other ] = steerableAdaptiveResolutionOrientationSpaceDetector( I, varargin )
+%steerableAdaptiveResolutionOrientationSpaceDetector Perform adaptive length orientation
 %space segmentation
 %
 % INPUT
