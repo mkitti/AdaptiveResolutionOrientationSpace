@@ -197,6 +197,9 @@ classdef OrientationSpaceResponse < handle
             if(nargin < 6 || isempty(offsetAngle))
                 offsetAngle = theta;
             end
+	    if(nargin < 7 || isempty(angleMultiplier))
+		angleMultiplier = 3;
+	    end
             [nlms_precise,varargout{1:nargout-1}] = nonLocalMaximaSuppressionPrecise(real(obj.a),theta,suppressionValue,interpMethod,mask,offsetAngle, angleMultiplier);
         end
                

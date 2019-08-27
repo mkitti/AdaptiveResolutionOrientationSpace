@@ -63,7 +63,7 @@ Perform adaptive resolution orientation space segmentation
         Type: Numeric, scalar
         Default: 2 (pixels)
 
-### ADVANCED INPUTS (NAMED PARAMETERS)
+### ADVANCE INPUTS (NAMED PARAMETERS)
     adaptLengthInRegime - Adapt the resolution with the highest regime by searching for the maxima with the smallest derivative with respect to K;
         Type: logical
         Default: true
@@ -119,7 +119,7 @@ These parameters allow some of the output in the struct {\em other}, below, to b
     nlms_highest - numeric 3D array
     nlms_single - numeric 2D array
 
-See below for detailed descriptions
+See OUTPUT for detailed descriptions
 
 ### OUTPUT
     response - Orientation filter response values at resolution K = K_m corresponding to the maxima in theta
@@ -185,13 +185,80 @@ Overall, the outputs allow for the outputs to readily used as a direct segmentat
     demo(128,:) = 1;
     demo = max(imgaussfilt(demo,2),imgaussfilt(eye(256),2));
     demo = imnoise(mat2gray(demo),'gaussian',0.1,0.01);
-    [res,theta,nms] = steerableAdaptiveLengthOrientationSpaceDetector(demo);
+    [res,theta,nms] = steerableAdaptiveResolutionOrientationSpaceDetector(demo);
     figure; imshow(nms,[]);
     orientationSpace.rainbowOrientationQuivers(theta,res,hsv(32));
     xlim(128+[-10 10]);
     ylim(128+[-10 10]);
 
 ![Zoom in Demonstration of Adaptive Resolution Orientation Space and NLMS Analysis](demo/demo.png)
+
+## OrientationSpaceFilter
+OrientationSpaceFilter represents a filter that is polar separable in the Fourier domain. It is used internally by steerableAdaptiveResolutionOrientationSpaceDetector but can be used independently.
+
+### Construction
+
+    F = OrientationSpaceFilter(f_c,b_f,K);
+    F = OrientationSpacefilter.constructByRadialOrder(f_c,K_f,K);
+
+f_c is the central frequency of the filter
+b_f is the frequency bandwidth
+K is the order of the filter that determines orientation resolution
+
+### Application to Image
+
+    I = imread('image.tif')
+    R = F*I
+
+R is an OrientationSpaceResponse object instance
+
+
+### Setup and Visualization without an Image
+
+    % Setup filter for 256 x 256 image
+    F.setupFilter(256);
+    % Show Fourier domain representation
+    figure; imshow(F,[]);
+    % Show image domain representation
+    figue; objshow(F,[]);
+
+## OrientationSpaceResponse
+OrientationSpaceResponse represents a filter response. It is used internally by steerableAdaptiveResolutionOrientationSpaceDetector, but can be used independently to examine the filter response.
+
+### Construction
+
+A response object is usually created by an OrientationSpaceFilter as above.
+
+    R = OrientationSpaceResponse(filter,angularResponse)
+
+filter is an OrientationSpaceFilter
+angularResponse is a 3D array, N x M x 2K+1
+
+### Get ridge orientation local maxima, response, and non-local maxima suppression
+
+    maxima_highest = R.getRidgeOrientationLocalMaxima();
+    res_highest_K8 = R.interpft1(maxima_highest);
+    nlms_highest_K8 = R.nonLocalMaximaSupressionPrecise(maxima_highest);
+
+    figure; imshow(max(res_highest_K8,[],3),[]);
+    figure; imshow(max(nlms_highest_K8,[],3),[]);
+
+### Get response at K = 3, and non-local maxima suppression
+
+    R3 = R.getResponseAtOrderFT(3,2);
+    res_highest_K3 = R3.interpft1(maxima_highest);
+    nlms_highest_K3 = R3.nonLocalMaximaSuppressionPrecise(res_highest_K3);
+
+    figure; imshow(max(res_highest_K3,[],3),[]);
+    figure; imshow(max(nlms_highest_K3,[],3),[]);
+
+### Get derivative of response with respect to orientation
+
+    Rd = R.getDerivativeResponse(1);
+    % Should close to zero
+    der_highest_K8 = Rd.interpft1(maxima_highest);
+
+    figure; imshow(der_highest_K8(:,:,1),[]);
 
 ## LICENSE
 Copyright (C) 2019, Jaqaman Lab - UT Southwestern, Goldman Lab - Northwestern 

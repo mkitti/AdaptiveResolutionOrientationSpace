@@ -1,6 +1,6 @@
 classdef OrientationSpaceFilter < handle & matlab.mixin.Heterogeneous
-    %SteerableVanGinkelFilter is a class object that represents a polar
-    %seperable frequency domain filter
+    %OrientationSpaceFilter is a class object that represents a polar
+    %separable frequency domain filter
     %
     % Based on the thesis by Michael van Ginkel. Chapter 3
     % "Image Analysis using Orientation Sapce based on Steerable Filters".
