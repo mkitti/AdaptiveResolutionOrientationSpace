@@ -231,8 +231,8 @@ A response object is usually created by an OrientationSpaceFilter as above.
 
     R = OrientationSpaceResponse(filter,angularResponse)
 
-filter is an OrientationSpaceFilter
-angularResponse is a 3D array, N x M x 2K+1
+* filter is an OrientationSpaceFilter
+* angularResponse is a 3D array, N x M x 2K+1
 
 ### Get ridge orientation local maxima, response, and non-local maxima suppression
 
