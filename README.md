@@ -50,7 +50,7 @@ In MATLAB execute:
     addpath(genpath('AdaptiveResolutionOrientationSpace'))
 
 ## steerableAdaptiveResolutionOrientationSpaceDetector
-Perform adaptive resolution orientation space segmentation
+Perform adaptive resolution orientation space segmentation.
 
 ### BASIC INPUT (ORDERED ARGUMENTS)
     I - (required) image
