@@ -55,7 +55,7 @@ Perform adaptive resolution orientation space segmentation.
 ### BASIC INPUT (ORDERED ARGUMENTS)
     I - (required) image
         Type: 2D numeric matrix, non-empty, N x M
-    order - (optional), K_h parameter that determines the highest $ K $ value used for initial filtering via OrientationSpaceFilter
+    order - (optional), K_h parameter that determines the highest *K* value used for initial filtering via OrientationSpaceFilter
         Type: Numeric, scalar
         Default: 8
     sigma - (optional), scale parameter setting the radial bandpass in pixels
@@ -111,7 +111,7 @@ Perform adaptive resolution orientation space segmentation.
     	Default: Convolve filter with the response to calculate the response
 
 ### UNSERIALIZATION INPUTS (NAMED PARAMETERS)
-These parameters allow some of the output in the struct {\em other}, below, to be fed back into the function in order to obtain the full output of the function. The purpose of this is so that the full output can be regenerated from a subset of the output that has been saved to disk, or otherwise serialized, without the need for complete recomputation.
+These parameters allow some of the output in the struct *other*, below, to be fed back into the function in order to obtain the full output of the function. The purpose of this is so that the full output can be regenerated from a subset of the output that has been saved to disk, or otherwise serialized, without the need for complete recomputation.
 
     maxima_highest - numeric 3D array
     K_highest - numeric 3D array
@@ -172,7 +172,7 @@ See OUTPUT for detailed descriptions
 
 ### USE OF OUTPUTS
 
-The main output of the function is the segmentation as outlined in Section \ref{section:segmentation}. Along with this the orientations and corresponding response values at K = K_m are provided. This is meant to mimic the outputs provided by steerable filter analysis.
+The main output of the function is the segmentation as outlined in Section S6. Along with this the orientations and corresponding response values at K = K_m are provided. This is meant to mimic the outputs provided by steerable filter analysis.
 
 The fourth output is the sampled orientation responses at K = K_h and is again meant for compatibility with the output by prior steerable filter analysis. This can be used to perform further analysis of orientation space including at for lower resolutions (K < K_h).
 
