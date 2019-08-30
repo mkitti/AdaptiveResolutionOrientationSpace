@@ -6,7 +6,7 @@ structures contain complex junctions where multiple filaments with distinct
 orientations overlap, yet state-of-the-art software generally uses single
 orientation analysis to segment these structures.
 We describe an image analysis approach to simultaneously segment both
-filamentous structures and their intersections in microscopy images,
+filamentous structures and their intersections (of arbitrary geometry) in microscopy images,
 based on analytically resolving coincident multiple orientations upon
 image filtering in a manner that balances orientation resolution and
 spatial localization.
@@ -52,10 +52,10 @@ In MATLAB execute:
 ## steerableAdaptiveResolutionOrientationSpaceDetector
 Perform adaptive resolution orientation space segmentation. This is the main
 driver function that performs the full segmentation as described in Section S6
-and illustrated is in Figure S4.
+and illustrated in Figure S4.
 
 ### BASIC INPUT (ORDERED ARGUMENTS)
-The only required input is a 2D image.
+The only required input is a 2D image. The other two basic inputs, which are optional, allow analysis customization.
 
     I - (required) image
         Type: 2D numeric matrix, non-empty, N x M
@@ -63,11 +63,11 @@ The only required input is a 2D image.
         Type: Numeric, scalar
         Default: 8
     sigma - (optional), scale parameter setting the radial bandpass in pixels
-            central frequency, f_c, of the bandpass filter will be 1/2/pi/sigma 
+            central frequency, f_c, of the bandpass filter will be 1/(2*pi*sigma) 
         Type: Numeric, scalar
         Default: 2 (pixels)
 
-### ADVANCE INPUTS (NAMED PARAMETERS)
+### ADVANCED INPUTS (NAMED PARAMETERS)
     adaptLengthInRegime - Adapt the resolution with the highest regime by searching for the maxima with the smallest derivative with respect to *K*;
         Type: logical
         Default: true
@@ -114,12 +114,12 @@ The only required input is a 2D image.
     	Type: OrientationSpaceResponse
     	Default: Convolve filter with the response to calculate the response
 
-### UNSERIALIZATION INPUTS (NAMED PARAMETERS)
+### FURTHER ADVANCED INPUTS: UNSERIALIZATION INPUTS (NAMED PARAMETERS)
 These parameters allow some of the output in the struct *other*, below,
 to be fed back into the function in order to obtain the full output of the
 function. The purpose of this is so that the full output can be regenerated
 from a subset of the output that has been saved to disk, or otherwise serialized,
-without the need for complete recomputation.
+without the need for complete re-computation.
 
     maxima_highest - numeric 3D array
     K_highest - numeric 3D array
@@ -129,27 +129,27 @@ without the need for complete recomputation.
 
 See OUTPUT for detailed descriptions of the above.
 
-Also note that the *StructExpand* options of the builtin *inputParser* is set to
-true meaning that the named parameters can be passed in using a struct.
+Also note that the *StructExpand* option of the builtin *inputParser* is set to
+true, meaning that the named parameters can be passed in using a struct.
 
 ### OUTPUT
 
-The main output of the function is the segmentation as outlined in Section S6
-which is the 3rd output, *nms*.
-Along with this the orientations, *theta*, and corresponding *response* values
-at K = K<sub>m</sub> are provided as the second and first outputs respectively.
-This is meant to mimic the outputs provided by steerable filter analysis.
+The main output of the function is the response-weighted segmentation as outlined in Section S6.
+This is the 3rd output, *nms*, as described below.
+Along with this, the orientations, *theta*, and corresponding *response* values
+at K = K<sub>m</sub> are provided as the 2nd and 1st outputs, respectively.
+This is meant to mimic the outputs provided by previous steerable filter analyses.
 
     response - Orientation filter response values at resolution K = K_m corresponding to the maxima in theta
-        Type: 3D numeric array of dimensions N x M x T
-    theta    - Contains the orientation local maxima detected at each pixel. T corresponds to the great number of maxima found at any pixel in the image
-        Type: 3D numeric array of dimensions N x M x T
-    nms      - Response weighted segmentation output, non-maximum suppression like image
+        Type: 3D numeric array of dimensions N x M x T. T corresponds to the largest number of maxima found at any pixel in the image.
+    theta    - Contains the orientation local maxima detected at each pixel.
+        Type: 3D numeric array of dimensions N x M x T. T corresponds to the largest number of maxima found at any pixel in the image.
+    nms      - Response-weighted segmentation output (analogous to non-maximum suppression output of previous analyses)
         Type: 2D numeric array of dimensions N x M
         
-The fourth output, *angularResponse* is the sampled orientation responses
-at K = K<sub>h</sub> and is again meant for compatibility with the output by the prior
-steerable filter analysis. The *angularResponse* can be used to construct
+The fourth output, *angularResponse*, is the sampled orientation responses
+at K = K<sub>h</sub> and is again meant for compatibility with the output of prior
+steerable filter analyses. The *angularResponse* can be used to construct
 an *OrientationSpaceResponse* below. This can be used to perform further
 analysis of orientation space including for lower resolutions (K < K<sub>h</sub>).
 
@@ -157,10 +157,10 @@ analysis of orientation space including for lower resolutions (K < K<sub>h</sub>
         Type: 3D array of dimensions N x M x 2K_h+1
         
 The fifth output, *other*, is a structure that contains fields referring to intermediate
-results created in the analysis process. Importantly, this contains information
-about the three AR-NLMS procedures performed. Because of the maximum response
-projections performed segmentation, this information is not readily extracted
-from the prior outputs. This information can be used to determine from what step
+results created throughout the analysis process. Importantly, this contains information
+about the three AR-NLMS branches employed for segmentation. Because of the maximum response
+projections performed at various stages of the algorithm, this information is not readily extracted
+from the prior outputs. The information in *other* can be used to determine in which step
 of the procedure a pixel was added or excluded from the final output.
 Additionally, the orientation information could be used for more precise
 localization operations.
