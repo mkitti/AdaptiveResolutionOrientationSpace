@@ -39,7 +39,8 @@ MATLAB 2017a or later
 
 See https://www.mathworks.com/support/requirements/matlab-system-requirements.html for operating system and hardware requirements.
 
-Git for installation (Alternatively, download a zip file)
+Git (version 2.2 or later) for installation (Alternatively, download a zip file)
+
 
 ## Installation
 Typical Install Time: 5 minutes
@@ -136,9 +137,16 @@ true, meaning that the named parameters can be passed in using a struct.
 
 The main output of the function is the response-weighted segmentation as outlined in Section S6.
 This is the 3rd output, *nms*, as described below.
+For a binary segmentation, the 2D map *nms* can be thresholded by a single threshold (i.e. `nms > 0`)
+or by threshold map such as *meanResponse* or *attenuatedMeanResponse* in the output struct *other*.
+
 Along with this, the orientations, *theta*, and corresponding *response* values
 at K = K<sub>m</sub> are provided as the 2nd and 1st outputs, respectively.
-This is meant to mimic the outputs provided by previous steerable filter analyses.
+These facilitate use of the function as an orientation detector.
+This is meant to mimic the outputs provided by steerableDetector MATLAB function
+available from [François Aguet](http://www.francoisaguet.net/software.html) or
+as part of [Filament Analysis Software](http://dx.doi.org/10.17632/xycvj95pw9.1).
+
 
     response - Orientation filter response values at resolution K = K_m corresponding to the maxima in theta
         Type: 3D numeric array of dimensions N x M x T. T corresponds to the largest number of maxima found at any pixel in the image.
@@ -148,8 +156,8 @@ This is meant to mimic the outputs provided by previous steerable filter analyse
         Type: 2D numeric array of dimensions N x M
         
 The fourth output, *angularResponse*, is the sampled orientation responses
-at K = K<sub>h</sub> and is again meant for compatibility with the output of prior
-steerable filter analyses. The *angularResponse* can be used to construct
+at K = K<sub>h</sub> and is again meant for compatibility with steerableDetector.
+The *angularResponse* can be used to construct
 an *OrientationSpaceResponse* below. This can be used to perform further
 analysis of orientation space including for lower resolutions (K < K<sub>h</sub>).
 
@@ -205,10 +213,13 @@ localization operations.
                 Type: 2D logical array, N x M
             .bridgedSkeleton - 2D logical array, output of the bridging procedure, where the segments have been connected with the bridges and have been subjected to morphological skeletonization
 
-Overall, the outputs allow for the outputs to readily used as a direct
-segmentation by thresholding the NMS-like output, *nms*,
-or as an intermediate step for further analysis by conducting further processing
-on the intermediate analysis available in the struct *other*.
+
+In summary, the outputs allow for basic usage as 
+a segmentation scheme (*nms*) and an orientation detector
+(*response*, *theta*,*angularResponse*)
+as well as advanced usage as an intermediate routine for further analysis of
+the multi-resolution features identified (*other*).
+
 
 ### EXAMPLES
     % Create demo image
