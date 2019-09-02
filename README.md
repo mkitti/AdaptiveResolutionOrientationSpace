@@ -137,7 +137,7 @@ true, meaning that the named parameters can be passed in using a struct.
 
 The main output of the function is the response-weighted segmentation as outlined in Section S6.
 This is the 3rd output, *nms*, as described below.
-For a binary segmentation, the 2D map *nms* can be thresholded by a single threshold (i.e. `nms > 0`)
+For a binary segmentation, the 2D map *nms* can be thresholded by a single threshold (e.g. `nms > 0`)
 or by threshold map such as *meanResponse* or *attenuatedMeanResponse* in the output struct *other*.
 
 Along with this, the orientations, *theta*, and corresponding *response* values
