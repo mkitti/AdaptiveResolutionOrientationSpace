@@ -216,8 +216,8 @@ localization operations.
 
 In summary, the outputs allow for basic usage as 
 a segmentation scheme (*nms*) and orientation detector
-(*response*, *theta*,*angularResponse*),
-as well as advanced usage as an intermediate routine for further analysis of
+(*response*, *theta*, *angularResponse*),
+and for advanced usage as an intermediate routine for further analysis of
 the identified multi-resolution features (*other*).
 
 
