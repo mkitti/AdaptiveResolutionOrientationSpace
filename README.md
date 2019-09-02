@@ -143,7 +143,7 @@ or by threshold map such as *meanResponse* or *attenuatedMeanResponse* in the ou
 Along with this, the orientations, *theta*, and corresponding *response* values
 at K = K<sub>m</sub> are provided as the 2nd and 1st outputs, respectively.
 These facilitate use of the function as an orientation detector.
-This is meant to mimic the outputs provided by steerableDetector MATLAB function
+This is meant to mimic the outputs provided by the steerableDetector MATLAB function
 available from [François Aguet](http://www.francoisaguet.net/software.html) or
 as part of [Filament Analysis Software](http://dx.doi.org/10.17632/xycvj95pw9.1).
 
@@ -215,10 +215,10 @@ localization operations.
 
 
 In summary, the outputs allow for basic usage as 
-a segmentation scheme (*nms*) and an orientation detector
-(*response*, *theta*,*angularResponse*)
+a segmentation scheme (*nms*) and orientation detector
+(*response*, *theta*,*angularResponse*),
 as well as advanced usage as an intermediate routine for further analysis of
-the multi-resolution features identified (*other*).
+the identified multi-resolution features (*other*).
 
 
 ### EXAMPLES
