@@ -1,4 +1,4 @@
-# Adaptive Resolution Orientation Space
+﻿# Adaptive Resolution Orientation Space
 
 ## Abstract
 Microscopy images of cytoskeletal, nucleoskeletal, and other filamentous
@@ -243,16 +243,26 @@ OrientationSpaceFilter represents a filter that is polar separable in the Fourie
 ### Construction
 
     F = OrientationSpaceFilter(f_c,b_f,K);
-    F = OrientationSpacefilter.constructByRadialOrder(f_c,K_f,K);
+    F = OrientationSpaceFilter.constructByRadialOrder(f_c,K_f,K);
 
 * f_c is the central frequency of the filter
 * b_f is the frequency bandwidth
 * K is the order of the filter that determines orientation resolution
+* K_f is the radial frequency order, f_c^2/b_f^2. This is 1 in this work.
+
+### Example
+
+The following two examples are equivalent with f_c = b_f = 1/(4*pi), K_f = 1, and K = 8
+
+    F = OrientationSpaceFilter(1./2/pi./2,1./2./pi./2,8);
+    F = OrientationSpaceFilter.constructByRadialOrder(1/2/pi./2,1,8);
 
 ### Application to Image
 
-    I = imread('image.tif')
-    R = F*I
+    %% I is just an ordinary image loaded via imread or via BioFormats
+    % I = imread('image.tif')
+    I = demo;
+    R = F*I;
 
 *R* is an *OrientationSpaceResponse* object instance
 
@@ -264,7 +274,7 @@ OrientationSpaceFilter represents a filter that is polar separable in the Fourie
     % Show Fourier domain representation
     figure; imshow(F,[]);
     % Show image domain representation
-    figue; objshow(F,[]);
+    figure; objshow(F,[]);
 
 ## OrientationSpaceResponse
 OrientationSpaceResponse represents a filter response. It is used internally by steerableAdaptiveResolutionOrientationSpaceDetector, but can be used independently to examine the filter response.
@@ -282,7 +292,7 @@ A response object is usually created by an OrientationSpaceFilter as above.
 
     maxima_highest = R.getRidgeOrientationLocalMaxima();
     res_highest_K8 = R.interpft1(maxima_highest);
-    nlms_highest_K8 = R.nonLocalMaximaSupressionPrecise(maxima_highest);
+    nlms_highest_K8 = R.nonLocalMaximaSuppressionPrecise(maxima_highest);
 
     figure; imshow(max(res_highest_K8,[],3),[]);
     figure; imshow(max(nlms_highest_K8,[],3),[]);
@@ -291,7 +301,7 @@ A response object is usually created by an OrientationSpaceFilter as above.
 
     R3 = R.getResponseAtOrderFT(3,2);
     res_highest_K3 = R3.interpft1(maxima_highest);
-    nlms_highest_K3 = R3.nonLocalMaximaSuppressionPrecise(res_highest_K3);
+    nlms_highest_K3 = R3.nonLocalMaximaSuppressionPrecise(maxima_highest);
 
     figure; imshow(max(res_highest_K3,[],3),[]);
     figure; imshow(max(nlms_highest_K3,[],3),[]);
