@@ -2,10 +2,9 @@ classdef OrientationSpaceFilter < handle & matlab.mixin.Heterogeneous
     %OrientationSpaceFilter is a class object that represents a polar
     %separable frequency domain filter
     %
-    % Based on the thesis by Michael van Ginkel. Chapter 3
-    % "Image Analysis using Orientation Sapce based on Steerable Filters".
-    % Delft University of Technology. October 7th, 2002.
-    %
+    % Filter object used by
+    % steerableAdaptiveResolutionOrientationSpaceDetector.m
+    % 
     % f_c: maximum frequency for the radial filter
     % b_f: frequency bandwidth for the radial filter
     % K: number of rotation angles through 360 degrees

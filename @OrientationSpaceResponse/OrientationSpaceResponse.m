@@ -1,6 +1,8 @@
 classdef OrientationSpaceResponse < handle
     %OrientationSpaceResponse Response object for OrientationSpaceFilter
     %
+    % Response object used by
+    % steerableAdaptiveResolutionOrientationSpaceDetector.m
     %
 %
 % Copyright (C) 2019, Jaqaman Lab - UT Southwestern, Goldman Lab - Northwestern 
