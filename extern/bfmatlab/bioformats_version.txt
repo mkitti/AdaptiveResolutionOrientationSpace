@@ -1,0 +1,1 @@
+bioformats is pinned to version 5.9.2 to maintain Java 7 compatability
