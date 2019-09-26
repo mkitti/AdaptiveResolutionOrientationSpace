@@ -1,0 +1,173 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="621402374" file="C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\packaging\standaloneAROS.prj" location="C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\packaging" name="standaloneAROS" preferred-package-location="C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\packaging\standaloneAROS\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>standaloneAROS</param.appname>
+    <param.icon>${PROJECT_ROOT}\standaloneAROS_resources\icon.ico</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\standaloneAROS_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\standaloneAROS_resources\icon_32.png</file>
+      <file>${PROJECT_ROOT}\standaloneAROS_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\standaloneAROS_resources\icon_16.png</file>
+    </param.icons>
+    <param.version>1.0</param.version>
+    <param.authnamewatermark>Mark Kittisopikul</param.authnamewatermark>
+    <param.email>mark.kittisopikul@northwestern.edu</param.email>
+    <param.company>UT Southwestern</param.company>
+    <param.summary>Perform Adaptive Resolution Orientation Space Analysis</param.summary>
+    <param.description>Perform Adaptive Resolution Orientation Space analysis to obtain multi-orientation data for segmentation and denoising.</param.description>
+    <param.screenshot>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\images\aros_highlight.png</param.screenshot>
+    <param.guid />
+    <param.installpath.string>\UT Southwestern\standaloneAROS\</param.installpath.string>
+    <param.installpath.combo>option.installpath.appdata</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\standaloneAROS\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\standaloneAROS\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\standaloneAROS\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\standaloneAROS</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>AROS_Installer_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>true</param.create.log>
+    <param.log.file>aros_log.txt</param.log.file>
+    <unset>
+      <param.version />
+      <param.guid />
+      <param.installpath.string />
+      <param.logo />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\arosStandaloneGUI.mlapp</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\extern\bfmatlab</file>
+    </fileset.resources>
+    <fileset.package>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\aros_logo_256.png</file>
+    </fileset.package>
+    <fileset.depfun>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+bridging\bwRemoveBranchPoints.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+bridging\bwRemoveSharpArrows.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+bridging\minimalBridge.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+bridging\minimalBridgingFromBinary.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+connectedComponents\ccDilate.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+connectedComponents\ccFilter.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+connectedComponents\ccPad.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+connectedComponents\ccUnpad.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+connectedComponents\halveEachComponent.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+connectedComponents\mat2offset.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+connectedComponents\orderPixelIdxList.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\+diffusion\alignExtrema.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\+diffusion\findRegimeBifurcation.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\+diffusion\orientationMaximaDerivatives.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\+diffusion\orientationMaximaFirstDerivative.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\+diffusion\unwrapExtrema.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\angularKernel.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\blendOrientationMap.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\getFrequencySpaceCoordinates.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\getResponseAtOrderVecHat.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\kernel.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\maxima.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\OrientationSpaceResponseIndex.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\radialKernel.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\rainbowOrientationQuivers.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\+orientationSpace\upsample.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\@OrientationSpaceResponse\animateAngularOrder.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\@OrientationSpaceResponse\findRegimesAtPoint.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\@OrientationSpaceResponse\OrientationSpaceResponse.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\@OrientationSpaceResponse\traceAllLocalMaxima.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\@OrientationSpaceResponse\traceAllLocalMaximaAtPoint.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\@OrientationSpaceResponse\traceLocalMaxima.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\@OrientationSpaceResponse\traceLocalMaximaHouseholder.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\graphics\optimalHistogram.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\imageProcessing\nonMaximumSuppression.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\imageSegmentation\thresholding\thresholdOtsu.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\imageSegmentation\thresholding\thresholdRosin.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\cutFirstHistMode.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\getMultiplicity.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\halleyft.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\horner_vec_real_freq_simpler.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\interpft1.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\interpft1_derivatives.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\interpft_extrema.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\linearAssignment\lap.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\linearAssignment\mexLap.mexw64</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\normList.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\padarrayXT.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\perpVector.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\mathfun\wraparoundN.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\dealcell.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\joinColumns.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\movieManagement\interface\isvalid.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\parcellfun_progress.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\progressText.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\progressTextMultiple.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\sec2struct.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\common\toolfun\sortMatrices.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\extern\colorcet.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\extern\fex\partitions\partitions.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\nonLocalMaximaSuppression.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\nonLocalMaximaSuppressionPrecise.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\OrientationSpaceEdgeFilter.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\OrientationSpaceFilter.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\OrientationSpaceNMS.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\OrientationSpaceRidgeFilter.m</file>
+      <file>C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\steerableAdaptiveResolutionOrientationSpaceDetector.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\standaloneAROS\for_testing" name="standaloneAROS.exe" optional="false">C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\packaging\standaloneAROS\for_testing\standaloneAROS.exe</file>
+      <file location="${PROJECT_ROOT}\standaloneAROS\for_testing" name="splash.png" optional="false">C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\packaging\standaloneAROS\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\standaloneAROS\for_testing" name="readme.txt" optional="true">C:\Users\mak2714\Documents\UTSW\Paper\adaptiveresolutionorientationspace\packaging\standaloneAROS\for_testing\readme.txt</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2017a</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.2</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
