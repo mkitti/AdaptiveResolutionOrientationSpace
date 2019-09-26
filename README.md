@@ -93,6 +93,9 @@ The only required input is a 2D image. The other two basic inputs, which are opt
     maskFillHoles - Logical indicating if holes should be filled in the nlmsMask. True indicates to holes should be filled.
         Type: logical
         Default: false
+    maskOnly - Only generate the mask and return the mask instead of the response. Useful for mask previews.
+        Type: logical
+        Default: false
     diagnosticMode - True if diagnostic figures should be shown
         Type: logical, scalar
         Default: false

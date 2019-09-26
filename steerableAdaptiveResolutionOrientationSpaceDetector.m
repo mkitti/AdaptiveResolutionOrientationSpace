@@ -40,6 +40,9 @@ function [ response, theta, nms, angularResponse, other ] = steerableAdaptiveRes
 %     maskFillHoles - Logical indicating if holes should be filled in the nlmsMask. True indicates to holes should be filled.
 %         Type: logical
 %         Default: false
+%     maskOnly - Only generate the mask and return the mask instead of the response. Useful for mask previews.
+%         Type: logical
+%         Default: false
 %     diagnosticMode - True if diagnostic figures should be shown
 %         Type: logical, scalar
 %         Default: false
@@ -222,6 +225,7 @@ ip.addParamValue('nlmsThreshold',[],@(x) validateattributes(x,{'numeric'},{'2d'}
 ip.addParamValue('useParallelPool',true,@islogical);
 ip.addParamValue('maskDilationDiskRadius',3,@(x) validateattributes(x,{'numeric'},{'scalar'}));
 ip.addParamValue('maskFillHoles',false,@(x) validateattributes(x,{'logical'},{'scalar'}));
+ip.addParamValue('maskOnly',false,@(x) validateattributes(x,{'logical'},{'scalar'}));
 ip.addParamValue('diagnosticMode',false,@(x) validateattributes(x,{'logical'},{'scalar'}));
 ip.addParamValue('K_sampling_delta',0.1,@(x) validateattributes(x,{'numeric'},{'scalar'}));
 ip.addParamValue('responseOrder',3,@(x) validateattributes(x,{'numeric'},{'scalar'}));
@@ -241,7 +245,7 @@ else
     F = ip.Results.filter;
 end
 
-if(ip.Results.useParallelPool)
+if(ip.Results.useParallelPool & ~ ip.Results.maskOnly)
     pool = gcp;
 end
 
@@ -347,6 +351,16 @@ else
     if(ip.Results.diagnosticMode)
         diag_rp = regionprops(nlmsMask,'BoundingBox','Area');
     end
+end
+
+if(ip.Results.maskOnly)
+    response = nlmsMask;
+    if(isempty(ip.Results.nlmsMask))
+        theta = meanResponseMask;
+        nms = meanResponse;
+        angularResponse = meanThreshold;
+    end
+    return;
 end
 
 %% Setup orientation analysis problem
