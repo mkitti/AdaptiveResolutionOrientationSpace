@@ -45,10 +45,56 @@ Git (version 2.2 or later) for installation (Alternatively, download a zip file)
 ## Installation
 Typical Install Time: 5 minutes
 
-In MATLAB execute:
+There are several options to install the software.
+
+### Graphical User Interface Install into MATLAB:
+
+1. Download AROS.mlappinstall
+2. Double click on the file to install as a MATLAB App
+
+### In MATLAB execute:
 
     !git clone https://github.com/mkitti/AdaptiveResolutionOrientationSpace 
     addpath(genpath('AdaptiveResolutionOrientationSpace'))
+
+The following methods do not require an existing MATLAB install.
+
+### Standalone Executable Installer
+
+1. Download AROS_Installer_web.exe
+2. Execute the installer which will download the MATLAB Compiler Runtime 2017a (~1 GB)
+
+### Standalone Executable ZIP File
+
+1. Download standaloneAROS.zip
+2. Unzip the files
+3. Download and install the MATLAB Compiler Runtime 2017a from [http://www.mathworks.com/products/compiler/mcr/index.html](http://www.mathworks.com/products/compiler/mcr/index.html)
+
+## arosStandaloneGUI.mlapp
+
+A graphical user interface now allows for analysis of single frames of any bioimage compatible with [Bio-Formats 5.9.2](https://docs.openmicroscopy.org/bio-formats/5.9.2/)
+
+### Basic Usage
+
+1. First select a bioimage file by selecting the "Browse for Image File ..." button.
+2. If there are multiple images within the file use the z, c, and t spinner controls to select the desired plane of the image file to analyze.
+3. Press the "Preview Mask" button to show the mask that the analysis software will use.
+4. If the mask is smaller than the intended area of analysis, do one or more of the following increase the mask dilation disk radius to increase the analysis area and/or selecting the "Fill Holes in Mask" checkbox.
+5. Select "Run Analysis" to start the analysis process.
+6. Data will be saved to AROS_Output.mat
+
+![Adaptive Resolution Orientation Space Graphical User Interface](images/aros_gui_screenshot.png)
+
+### Advanced usage
+
+1. Adjust the order to select the highest orientation resolution. Higher orientation resolution will allow for angles to be more clearly separated at the potential cost of spatial localization. Lower orientation resolution will help to spatially confine the analysis.
+2. Adjust sigma to tune the width of the filter. A smaller width will allow the analysis to discover finer lines. A larger width will focus the analysis on courser lines.
+3. Changing the thresholding method to Rosin will produce better thresholds for images with unimodal histograms.
+4. Changing the Mask Type allows for explicit control over the mask:
+4a. Select Mask Type "ROI mask" and then select "Browse for Mask" to restrict the analysis to within a particular area using an external binary image where the white pixels indicate the area of interest.
+4b. Select Mask Type "NLMS mask" to directly set the analysis area using a external binary image where the white pixels indicate the area to be analyzed.
+4c. Select Mask Type "No Mask" to analyze the entire image. This may slow if the image is large.
+
 
 ## steerableAdaptiveResolutionOrientationSpaceDetector
 Perform adaptive resolution orientation space segmentation. This is the main
