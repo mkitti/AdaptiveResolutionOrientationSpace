@@ -380,3 +380,7 @@ GNU General Public License for more details.
  
 You should have received a copy of the GNU General Public License
 along with AdaptiveResolutionOrientationSpace.  If not, see <http://www.gnu.org/licenses/>.
+
+## RELATED SOFTWARE
+
+[Christian Knapp](https://github.com/krizzodil) has ported some of the code to Python: https://github.com/krizzodil/PythonOrientationSpaceResponse
