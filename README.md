@@ -14,9 +14,11 @@ spatial localization.
 
 ## Manuscript
 
-"Adaptive-Resolution Multi-Orientation Analysis of Complex Filamentous Network Images"
+"Adaptive Multi-Orientation Resolution Analysis of Complex Filamentous Network Images"
 
 Mark Kittisopikul<sup>1,2</sup>, Amir Vahabikashi<sup>2</sup>, Takeshi Shimi<sup>2,3</sup>, Robert D. Goldman<sup>2</sup>, and Khuloud Jaqaman<sup>1,4</sup>
+
+https://pubmed.ncbi.nlm.nih.gov/32653917/
 
 ### Affiliations
 
